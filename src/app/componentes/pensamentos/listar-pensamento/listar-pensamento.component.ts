@@ -11,6 +11,7 @@ export class ListarPensamentoComponent {
   listaPensamentos: IPensamento[] = [];
   paginaAtual = 1;
   haMaisPensamentos= true;
+  filtro = '';
 
   constructor(private service: PensamentoService) { }
 
