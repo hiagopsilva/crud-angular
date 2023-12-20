@@ -43,4 +43,11 @@ export class PensamentoService {
       return this.http.put<IPensamento>(url, pensamento )
   }
 
+  mudarFavorito(pensamento: IPensamento): Observable<IPensamento> {
+    pensamento.favorito = !pensamento.favorito;
+
+    const url= `${this.API}/${pensamento.id}`;
+
+    return this.editar(pensamento);
+  }
 }
