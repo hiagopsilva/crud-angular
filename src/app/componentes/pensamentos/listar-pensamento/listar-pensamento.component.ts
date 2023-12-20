@@ -9,10 +9,11 @@ import { PensamentoService } from '../pensamento.service';
 })
 export class ListarPensamentoComponent {
   listaPensamentos: IPensamento[] = [];
+  paginaAtual = 1;
 
   constructor(private service: PensamentoService) { }
 
   ngOnInit(): void {
-    this.service.listar().subscribe(pensamentos => this.listaPensamentos = pensamentos);
+    this.service.listar(this.paginaAtual).subscribe(pensamentos => this.listaPensamentos = pensamentos);
   }
 }
