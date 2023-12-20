@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient} from '@angular/common/http'
 import { IPensamento } from './pensamento/interface.pensamento';
+import { Observable } from 'rxjs';
 
 @Injectable({
     providedIn: 'root'
@@ -11,7 +12,11 @@ export class PensamentoService {
 
   constructor(private http: HttpClient) {}
 
-  listar() {
+  listar(): Observable<IPensamento[]> {
     return this.http.get<IPensamento[]>(this.API);
+  }
+
+  criar(pensamento: IPensamento): Observable<IPensamento> {
+    return this.http.post<IPensamento>(this.API, pensamento);
   }
 }
