@@ -24,6 +24,21 @@ export class PensamentoService {
     return this.http.get<IPensamento[]>(this.API, { params });
   }
 
+  listarPensamentosFavoritos(page: number, filter: string) : Observable<IPensamento[]>{
+    const pageLimit = 6;
+
+    let params = new HttpParams()
+      .set('_page', page.toString())
+      .set('_limit', pageLimit.toString())
+      .set('favorito', 'true');
+
+    if(filter.trim().length > 2) {
+      params = params.set('q', filter);
+    }
+
+    return this.http.get<IPensamento[]>(this.API, { params });
+  }
+
   criar(pensamento: IPensamento): Observable<IPensamento> {
     return this.http.post<IPensamento>(this.API, pensamento);
   }
