@@ -6,6 +6,7 @@
           placeholder="O que voce procura?"
           class="filtro"
           [(ngModel)]="filtro"
+          (keyup)="pesquisarPensamentos()"
         />
       </div>
 
