@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IPensamento } from '../pensamento/interface.pensamento';
 import { PensamentoService } from '../pensamento.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-listar-pensamento',
@@ -15,7 +16,10 @@ export class ListarPensamentoComponent {
   favorito = false
   listaFavoritos: IPensamento[] = [];
 
-  constructor(private service: PensamentoService) { }
+  constructor(
+    private service: PensamentoService,
+    private router: Router
+    ) { }
 
   ngOnInit(): void {
     this.service.listar(this.paginaAtual, this.filtro, this.favorito).subscribe(pensamentos => this.listaPensamentos = pensamentos);
@@ -52,6 +56,8 @@ export class ListarPensamentoComponent {
   }
 
   recarregarComponente() {
-    location.reload();
+    this.paginaAtual = 1;
+
+    this.router.navigate([this.router.url]);
   }
 }
