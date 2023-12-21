@@ -50,4 +50,8 @@ export class ListarPensamentoComponent {
       this.listaFavoritos = pensamentos
     })
   }
+
+  recarregarComponente() {
+    location.reload();
+  }
 }
