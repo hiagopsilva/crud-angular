@@ -12,15 +12,17 @@ export class ListarPensamentoComponent {
   paginaAtual = 1;
   haMaisPensamentos= true;
   filtro = '';
+  favorito = false
+
 
   constructor(private service: PensamentoService) { }
 
   ngOnInit(): void {
-    this.service.listar(this.paginaAtual, this.filtro).subscribe(pensamentos => this.listaPensamentos = pensamentos);
+    this.service.listar(this.paginaAtual, this.filtro, this.favorito).subscribe(pensamentos => this.listaPensamentos = pensamentos);
   }
 
   CarregarMaisPensamentos() {
-    this.service.listar(++this.paginaAtual, this.filtro).subscribe(pensamentos => {
+    this.service.listar(++this.paginaAtual, this.filtro, this.favorito).subscribe(pensamentos => {
       this.listaPensamentos.push(...pensamentos);
 
       if (!pensamentos.length) {
@@ -33,16 +35,17 @@ export class ListarPensamentoComponent {
     this.haMaisPensamentos = true;
     this.paginaAtual = 1;
 
-    this.service.listar(this.paginaAtual, this.filtro).subscribe(pensamentos => {
+    this.service.listar(this.paginaAtual, this.filtro, this.favorito).subscribe(pensamentos => {
       this.listaPensamentos = pensamentos
     })
   }
 
   listarFavoritos() {
+    this.favorito = true
     this.haMaisPensamentos = true;
     this.paginaAtual = 1;
 
-    this.service.listarPensamentosFavoritos(this.paginaAtual, this.filtro).subscribe(pensamentos => {
+    this.service.listar(this.paginaAtual, this.filtro, this.favorito).subscribe(pensamentos => {
       this.listaPensamentos = pensamentos
     })
   }
